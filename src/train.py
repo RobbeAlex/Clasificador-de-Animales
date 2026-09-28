@@ -1,9 +1,3 @@
-"""
-train.py
-Entrena un modelo de clasificación de imágenes para las 10 clases del dataset
-y guarda los pesos estructurados en model.pth.
-"""
-
 from pathlib import Path
 import torch
 import torch.nn as nn
