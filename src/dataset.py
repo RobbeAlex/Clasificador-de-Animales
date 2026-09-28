@@ -1,15 +1,3 @@
-"""
-dataset.py
-Carga imágenes desde carpetas (train y test) y genera particiones
-de train, valid y test dividiendo train mediante torch.utils.data.random_split.
-"""
-
-"""
-dataset.py
-Carga imágenes desde una única carpeta y genera particiones
-de train, valid y test dividiendo la data dinámicamente mediante torch.utils.data.random_split.
-"""
-
 from pathlib import Path
 import torch
 from torch.utils.data import DataLoader, random_split, Dataset
