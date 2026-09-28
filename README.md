@@ -108,6 +108,7 @@ Clasificador-de-Animales/
 ├── data/                   # Datasets de entrenamiento y prueba (no incluido en git)
 ├── models/                 # Modelos entrenados y guardados (.pt, .pth)
 ├── src/                    # Código fuente principal
+│   ├── config.py           # Script para establecer variables
 │   ├── get_data.py         # Script para descargar y preparar el dataset
 │   ├── model_builder.py    # Definición de la arquitectura del modelo
 │   ├── train.py            # Script principal de entrenamiento
