@@ -110,7 +110,9 @@ Clasificador-de-Animales/
 ├── src/                    # Código fuente principal
 │   ├── config.py           # Script para establecer variables
 │   ├── get_data.py         # Script para descargar y preparar el dataset
+│   ├── translate.py        # Utilidad para traducir/mapear los nombres de las clases
 │   ├── model_builder.py    # Definición de la arquitectura del modelo
+│   ├── engine.py           # Funciones del bucle de entrenamiento y evaluación (uso interno)
 │   ├── train.py            # Script principal de entrenamiento
 │   ├── predict_image.py    # Script para clasificar imágenes nuevas con el modelo entrenado
 │   └── app.py              # Aplicación principal de Streamlit (Interfaz Web)
