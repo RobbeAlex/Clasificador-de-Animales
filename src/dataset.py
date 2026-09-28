@@ -1,15 +1,3 @@
-"""
-dataset.py
-Carga imágenes desde carpetas (train y test) y genera particiones
-de train, valid y test dividiendo train mediante torch.utils.data.random_split.
-"""
-
-"""
-dataset.py
-Carga imágenes desde una única carpeta y genera particiones
-de train, valid y test dividiendo la data dinámicamente mediante torch.utils.data.random_split.
-"""
-
 from pathlib import Path
 import torch
 from torch.utils.data import DataLoader, random_split, Dataset
@@ -36,7 +24,7 @@ class TransformedSubset(Dataset):
 
 
 def create_dataloaders(
-    data_dir: str = r"C:\Users\rober\.gemini\antigravity\scratch\ai-code-auditor\Deep_Learning_CUGDL\07_pytorch_modular_intro\personal\raw-img",
+    data_dir: str = r"C:\Users\rober\Downloads\Clasificador_de_Animales\data",
     train_split_ratio: float = 0.7,
     val_split_ratio: float = 0.15,
     batch_size: int = 32,

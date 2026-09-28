@@ -1,9 +1,8 @@
-import torch
 from torchvision import transforms
 from PIL import Image
 import numpy as np
-from model_builder import Model_Classification
-from config import HIDDEN_UNITS
+from src.model_builder import Model_Classification
+from src.config import HIDDEN_UNITS
 
 def process_and_predict_image(image_path: str, model_path: str = "modelo_entrenado.pth"):
     # 1. Cargar la imagen y convertirla a escala de grises

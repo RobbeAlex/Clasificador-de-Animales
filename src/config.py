@@ -2,8 +2,8 @@
 
 # Data paths
 
-TRAIN_PATH = "../personal/raw-img"
-TEST_PATH = "../personal/raw-img"
+TRAIN_PATH = "../Clasificador_de_Animales/data"
+TEST_PATH = "../Clasificador_de_Animales/data"
 
 # Random seed
 SEED = 42

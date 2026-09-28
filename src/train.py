@@ -1,9 +1,3 @@
-"""
-train.py
-Entrena un modelo de clasificación de imágenes para las 10 clases del dataset
-y guarda los pesos estructurados en model.pth.
-"""
-
 from pathlib import Path
 import torch
 import torch.nn as nn
@@ -17,7 +11,7 @@ def train():
 
     # 1. Cargar DataLoaders inyectando explícitamente el directorio
     print("Cargando datos...")
-    data_directory = r"C:\Users\rober\.gemini\antigravity\scratch\ai-code-auditor\Deep_Learning_CUGDL\07_pytorch_modular_intro\personal\raw-img"
+    data_directory = r"C:\Users\rober\Downloads\Clasificador_de_Animales\data"
 
     train_loader, val_loader, test_loader, class_names = create_dataloaders(
         data_dir=data_directory,
