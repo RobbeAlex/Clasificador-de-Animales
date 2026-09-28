@@ -1,0 +1,38 @@
+---
+references:
+  - "File: /app.py"
+generationTime: 2026-09-28T20:20:32.943Z
+---
+flowchart TD
+    A(["Start app.py"]) --> B["Configure Streamlit page"]
+    B --> C["Define class names, translations, and inference transform"]
+    C --> D["Select CUDA device or CPU"]
+    D --> E["Set model path to model.pth"]
+    E --> F{"Does model.pth exist?"}
+
+    F -->|"No"| G["Show missing-model warning"]
+    G --> Z(["End"])
+
+    F -->|"Yes"| H[["load_trained_model(filepath)"]]
+    H --> I["Create EfficientNet-B0"]
+    I --> J["Replace classifier with 10-class Linear layer"]
+    J --> K["Load state_dict with torch.load"]
+    K --> L["Move model to device and set evaluation mode"]
+    L --> M["Display upload control"]
+
+    M --> N{"Was an image uploaded?"}
+    N -->|"No"| M
+    N -->|"Yes"| O["Open image and convert to RGB"]
+    O --> P["Display uploaded image"]
+    P --> Q["Resize, convert to tensor, normalize, and add batch dimension"]
+    Q --> R["Run model inference without gradients"]
+    R --> S["Apply softmax to model outputs"]
+    S --> T["Select highest-probability class"]
+    T --> U["Translate class name and calculate confidence"]
+    U --> V["Display prediction and confidence"]
+
+    V --> W["Iterate through all class probabilities"]
+    W --> X["Translate and capitalize each class label"]
+    X --> Y["Build probability dictionary"]
+    Y --> AA["Display probability bar chart"]
+    AA --> M

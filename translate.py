@@ -1,0 +1,1 @@
+translate = {"cane": "perro", "cavallo": "caballo", "elefante": "elefante", "farfalla": "mariposa", "gallina": "gallina", "gatto": "gato", "mucca": "vaca", "pecora": "oveja", "scoiattolo": "ardilla", "dog": "perro", "cavallo": "horse", "elephant" : "elefante", "butterfly": "mariposa", "chicken": "gallina", "cat": "gato", "cow": "vaca", "spider": "araña", "squirrel": "ardilla"}

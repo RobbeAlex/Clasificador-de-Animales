@@ -1,0 +1,20 @@
+---
+references:
+  - "File: /model_builder.py"
+generationTime: 2026-09-28T20:18:40.084Z
+---
+flowchart TD
+    A(["Import PyTorch and SEED"]) --> B["Set random seed with torch.manual_seed(SEED)"]
+    B --> C["Define Model_Classification"]
+    C --> D["Initialize model with input_shape, hidden_units, and output_features"]
+    D --> E["Create layer_1: Linear input to hidden units"]
+    E --> F["Create layer_2: Linear hidden units to hidden units"]
+    F --> G["Create layer_3: Linear hidden units to output features"]
+    G --> H["Create ReLU and Softmax modules"]
+    H --> I["Receive input tensor x in forward()"]
+    I --> J["Apply layer_1"]
+    J --> K["Apply ReLU"]
+    K --> L["Apply layer_2"]
+    L --> M["Apply ReLU"]
+    M --> N["Apply layer_3"]
+    N --> O(["Return classification logits"])
