@@ -108,17 +108,25 @@ Clasificador-de-Animales/
 ├── data/                   # Datasets de entrenamiento y prueba (no incluido en git)
 ├── models/                 # Modelos entrenados y guardados (.pt, .pth)
 ├── src/                    # Código fuente principal
-│   ├── config.py           # Script para establecer variables
-│   ├── get_data.py         # Script para descargar y preparar el dataset
-│   ├── translate.py        # Utilidad para traducir/mapear los nombres de las clases
+│   ├── config.py           # Script para establecer variables de ruta y entorno
+│   ├── get_data.py         # Script para descargar y organizar el dataset
+│   ├── dataset.py          # Manejo de DataLoaders y Data Augmentation
+│   ├── translate.py        # Utilidad para mapear los nombres de clases a español
 │   ├── model_builder.py    # Definición de la arquitectura del modelo
-│   ├── engine.py           # Funciones del bucle de entrenamiento y evaluación (uso interno)
+│   ├── engine.py           # Funciones lógicas del bucle de entrenamiento y evaluación
 │   ├── train.py            # Script principal de entrenamiento
-│   ├── predict_image.py    # Script para clasificar imágenes nuevas con el modelo entrenado
+│   ├── predict_image.py    # Clasificación de imágenes nuevas mediante terminal
 │   └── app.py              # Aplicación principal de Streamlit (Interfaz Web)
 ├── requirements.txt        # Dependencias del proyecto
 └── README.md               # Documentación del proyecto
 ```
+
+## 🧩 Archivos Auxiliares y de Soporte
+Para mantener un código limpio, legible y modular, este proyecto cuenta con archivos que no se ejecutan de manera directa, sino que actúan como soporte para los scripts principales:
+
+- **dataset.py:** Justifica su presencia encapsulando toda la lógica de transformación de imágenes de PyTorch. Es importado por train.py para aplicar Data Augmentation (rotaciones, normalización) y convertir las imágenes en lotes (batches) optimizados para la memoria del sistema.
+- **translate.py:** El dataset original etiqueta a los animales en inglés o italiano (ej. dog, cane). Este archivo funciona como un diccionario global para estandarizar la salida al español. Es consumido por la inferencia (predict_image.py / app.py) para devolver resultados amigables (ej. "🐶 Perro").
+- **engine.py:** Contiene la lógica matemática pura del entrenamiento (cálculo de pérdida, propagación hacia atrás y precisión). Esto evita que el archivo de entrenamiento principal quede sobrepoblado de código.
 
 ## 🧠 Entrenamiento del Modelo
 Si deseas entrenar el modelo desde cero con tu propio dataset de animales:
