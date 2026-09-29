@@ -107,6 +107,7 @@ Clasificador-de-Animales/
 │
 ├── data/                   # Datasets de entrenamiento y prueba
 ├── models/                 # Modelos entrenados y guardados (.pt, .pth)
+├── diagrams/               # Diagramas de flujo de los proyecto general y codigos principales
 ├── src/                    # Código fuente principal
 │   ├── config.py           # Script para establecer variables de ruta y entorno
 │   ├── get_data.py         # Script para descargar y organizar el dataset
