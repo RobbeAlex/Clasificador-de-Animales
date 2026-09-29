@@ -1,0 +1,260 @@
+---
+references:
+  - "File: /src/app.py"
+  - "File: /src/config.py"
+  - "File: /src/dataset.py"
+  - "File: /src/engine.py"
+  - "File: /src/get_data.py"
+  - "File: /src/model_builder.py"
+  - "File: /src/predict_image.py"
+  - "File: /src/train.py"
+  - "File: /src/translate.py"
+  - |+
+    Reference: <skills>
+    Here is a list of skills that contain domain specific knowledge on a variety of topics.
+    Each skill comes with a description of the topic and a file path that contains the detailed instructions.
+    When a user asks you to perform a task that falls within the domain of a skill, use the #tool:read/readFile tool to acquire the full instructions from the file URI.
+    <skill>
+    <name>appmap-config</name>
+    <description>Configure what AppMap records. Covers appmap.yml (packages, exclude, shallow, appmap_dir, one config per project) and function labels, with syntax for Ruby, Python, Node, and Java verified against each agent's test suite. Use when creating the starting config, cutting noise from recordings, or applying labels the review suggested.</description>
+    <file>c:\Users\rober\.agents\skills\appmap-config\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>appmap-gold-traces</name>
+    <description>Maintain a committed baseline of curated AppMap recordings (gold traces). Bootstrap gold_traces/manifest.yaml, choose suitable tests, record them with the bundled engine, check size and run-to-run stability, and bless new baselines when code legitimately changes. Use when asked to create, update, check, or bless gold traces, or when a review needs a baseline. To diff and review two revisions, see appmap-review.</description>
+    <file>c:\Users\rober\.agents\skills\appmap-gold-traces\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>appmap-record</name>
+    <description>Record AppMap data from tests, HTTP requests, a running process, or a code block, for Ruby, Python, Node, and Java. Use when asked to record, capture, or generate AppMap data, or when recording produces no output. Configuration syntax is in appmap-config.</description>
+    <file>c:\Users\rober\.agents\skills\appmap-record\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>appmap-review</name>
+    <description>Review the runtime-behavior change between two revisions using the committed gold traces, or between two AppMap recordings made by hand (for example one Postman run recorded on each of two branches). Archives and compares each side with the AppMap CLI, then interprets the result into a findings-first report covering unintended side effects, missing security checks, SQL and HTTP risks, and coverage gaps. Use when asked to review a branch, PR, or release for behavioral change, to compare two AppMap recordings, or to decide which changed gold traces to bless. The gold-traces path needs baselines maintained by appmap-gold-traces; the ad-hoc path needs only the two recordings.</description>
+    <file>c:\Users\rober\.agents\skills\appmap-review\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>appmap-setup</name>
+    <description>Set up AppMap recording in a repository - confirm the AppMap tools are installed where the other skills expect them, get one unit test and one integration test recording, prune noisy classes from the recordings, and write the working record commands into gold_traces/manifest.yaml so every later session records the same way. Use when asked to set up, install, or configure AppMap recording for a project. Does not curate gold traces or run a review; see appmap-setup-review for that.</description>
+    <file>c:\Users\rober\.agents\skills\appmap-setup\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>appmap-setup-review</name>
+    <description>Set up a two-revision AppMap comparison in a repository - pick BASE and HEAD commits one feature apart, run appmap-setup on BASE, seed gold traces there, replay the config onto HEAD via cherry-pick, update the gold traces for the feature, and run an appmap-review between the two. Use when asked to demonstrate or evaluate AppMap gold-trace comparison on an existing change. For plain recording setup, use appmap-setup instead.</description>
+    <file>c:\Users\rober\.agents\skills\appmap-setup-review\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>grill-me</name>
+    <description>Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions "grill me".</description>
+    <file>c:\Users\rober\.claude\skills\grill-me\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>prompt-master</name>
+    <description>Generates optimized prompts for AI tools. Activates only when the user explicitly asks to write, fix, improve, or adapt a prompt for a specific AI tool (LLM, Cursor, Midjourney, image AI, video AI, coding agents, etc.). Does not activate for general conversation, coding tasks, document writing, or other non-prompt-engineering work.</description>
+    <file>c:\Users\rober\.claude\skills\prompt-master\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>dotnet-webapi</name>
+    <description>Guides creation and modification of ASP.NET Core Web API endpoints with correct HTTP semantics, OpenAPI metadata, and error handling. USE FOR: adding new API endpoints (controllers or minimal APIs), wiring up OpenAPI/Swagger, creating .http test files, setting up global error handling middleware. DO NOT USE FOR: general C# coding style, EF Core data access or query optimization (use optimizing-ef-core-queries), frontend/Blazor work, gRPC services, or SignalR hubs.
+    </description>
+    <file>c:\Users\rober\.vscode\extensions\ms-dotnettools.csdevkit-3.40.210-win32-x64\src\copilot\skills\dotnet-aspnetcore\dotnet-webapi\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>analyzing-dotnet-performance</name>
+    <description>Scans .NET code for ~50 performance anti-patterns across async, memory, strings, collections, LINQ, regex, serialization, and I/O with tiered severity classification. Use when analyzing .NET code for optimization opportunities, reviewing hot paths, or auditing allocation-heavy patterns.</description>
+    <file>c:\Users\rober\.vscode\extensions\ms-dotnettools.csdevkit-3.40.210-win32-x64\src\copilot\skills\dotnet-diag\analyzing-dotnet-performance\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>run-tests</name>
+    <description>Run, filter, or troubleshoot .NET tests with `dotnet test`. USE FOR: running all tests in a project or solution; running only a subset (a specific test class, category, or trait) via filters; running a single target framework in a multi-TFM project (`--framework`); producing TRX reports; collecting crash or hang dumps; diagnosing why `dotnet test` fails or uses the wrong argument syntax. Detects the test platform (VSTest vs Microsoft.Testing.Platform) and framework (MSTest/xUnit/NUnit/TUnit), then picks the matching command: the `--` separator on .NET SDK 8/9 vs 10+, the right filter flag (--filter, --filter-class, --filter-trait, --filter-query, --treenode-filter), and TRX/blame flags. DO NOT USE FOR: writing test code (use code-testing-agent), iterating on failing tests without rebuilding (use mtp-hot-reload), CI/CD config, or debugging test logic.
+    </description>
+    <file>c:\Users\rober\.vscode\extensions\ms-dotnettools.csdevkit-3.40.210-win32-x64\src\copilot\skills\dotnet-test\run-tests\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>python-fact-grounded-coding</name>
+    <description>Use when the user explicitly asks for the Python fact-grounded coding skill, or when a Python coding, debugging, explanation, or bug-fix task should be grounded in verified Pylance facts, runtime values, diagnostics, selected interpreter state, tests, or debugger evidence before changing code or reporting a conclusion.</description>
+    <file>c:\Users\rober\.vscode\extensions\ms-python.vscode-pylance-2026.4.1\skills\python-fact-grounded-coding\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>python-type-inference</name>
+    <description>Use when the user explicitly asks for the Python type inference skill, or when a task needs the single correct type for a specific Python symbol — a function return, parameter, module-level value, or class/instance field — and that type must be verified against real code rather than guessed. This is the shared core used by the type-annotation and stub-writing skills.</description>
+    <file>c:\Users\rober\.vscode\extensions\ms-python.vscode-pylance-2026.4.1\skills\python-type-inference\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>python-add-type-annotations</name>
+    <description>Use when the user explicitly asks for the Python type annotation skill, or when they want to make their own Python source type-safe by adding inline type annotations to one file, a set of files, or a package/workspace in bulk — annotating function return types, parameters, module-level and class-level variables/constants (including dataclass and similar fields), validating diagnostics against a baseline, and reporting newly surfaced type errors.</description>
+    <file>c:\Users\rober\.vscode\extensions\ms-python.vscode-pylance-2026.4.1\skills\python-add-type-annotations\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>python-write-stubs</name>
+    <description>Use when the user explicitly asks for the Python stub-writing skill, wants to create or improve `.pyi` type stubs for a third-party Python package, or needs partial stubs under a workspace `typings/` directory without modifying installed package source. Generates stubs through Pylance, resolves uncertain types with the Python type-inference skill, and validates public API, diagnostics, runtime compatibility, and type completeness.</description>
+    <file>c:\Users\rober\.vscode\extensions\ms-python.vscode-pylance-2026.4.1\skills\python-write-stubs\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>pylance-docs</name>
+    <description>Use when the user explicitly asks for the Pylance docs skill, or when an answer depends on current official Pylance documentation for settings, diagnostics, configuration, troubleshooting, feature behavior, or supported workflows.</description>
+    <file>c:\Users\rober\.vscode\extensions\ms-python.vscode-pylance-2026.4.1\skills\pylance-docs\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>pylance-refactoring</name>
+    <description>Use when the user explicitly asks for the Pylance refactoring skill, or when they want named automated Python refactorings applied to one file, many files, a workspace, a folder subset, or a composed cleanup workflow such as workspace-wide unused-import cleanup, wildcard-import conversion followed by unused-import cleanup, inferred type annotations, or Pylance fix-all.</description>
+    <file>c:\Users\rober\.vscode\extensions\ms-python.vscode-pylance-2026.4.1\skills\pylance-refactoring\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>pylance-python-profiling</name>
+    <description>Use when the user wants to profile Python code with Pylance: capture CPU time (Tachyon), trace calls (sys.monitoring), or memory (Memray); profile a whole run or a specific region between two source locations; add sub-region markers; and explore the resulting profile (hot functions, call trees, time slices). Also use for the 3.15+ interpreter requirement and related error guidance.</description>
+    <file>c:\Users\rober\.vscode\extensions\ms-python.vscode-pylance-2026.4.1\skills\pylance-python-profiling\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>add-python-version-support</name>
+    <description>Guide changes required when a project adds a newer Python version above its current tested ceiling while preserving its existing minimum. Use when asked to support, test, certify, or prepare for a newer Python release at the upper end of the support range without dropping existing runtimes.</description>
+    <file>c:\Users\rober\.vscode\extensions\ms-python.vscode-pylance-2026.4.1\skills\add-python-version-support\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>drop-python-version-support</name>
+    <description>Guide changes required when a project drops one or more oldest supported Python versions and raises its minimum supported version. Use when asked to remove the oldest supported runtimes, raise the minimum Python requirement, modernize code after raising the Python floor, or upgrade/migrate by replacing older runtimes.</description>
+    <file>c:\Users\rober\.vscode\extensions\ms-python.vscode-pylance-2026.4.1\skills\drop-python-version-support\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>project-setup-info-local</name>
+    <description>Comprehensive setup steps to help the user create complete project structures in a VS Code workspace; this tool is designed for full project initialization and scaffolding, not for creating individual files. When to use this tool: user wants to create a new complete project from scratch; setting up entire project frameworks (TypeScript projects, React apps, Node.js servers, etc.); initializing Model Context Protocol (MCP) servers with full structure; creating VS Code extensions with proper scaffolding; setting up Next.js, Vite, or other framework-based projects; user asks for "new project", "create a workspace", "set up a [framework] project"; need to establish a complete development environment with dependencies, config files, and folder structure. When NOT to use this tool: creating single files or small code snippets; adding individual files to existing projects; making modifications to existing codebases; user asks to "create a file" or "add a component"; simple code examples or demonstrations; debugging </description>
+    <file>c:\Users\rober\AppData\Local\Programs\Microsoft VS Code\04c0d99f4f\resources\app\extensions\copilot\assets\prompts\skills\project-setup-info-local\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>get-search-view-results</name>
+    <description>Get the current search results from the Search view in VS Code</description>
+    <file>c:\Users\rober\AppData\Local\Programs\Microsoft VS Code\04c0d99f4f\resources\app\extensions\copilot\assets\prompts\skills\get-search-view-results\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>agent-customization</name>
+    <description>**WORKFLOW SKILL** — Create, update, review, fix, or debug VS Code agent customization files (.instructions.md, .prompt.md, .agent.md, SKILL.md, copilot-instructions.md, AGENTS.md). USE FOR: saving coding preferences; troubleshooting why instructions/skills/agents are ignored or not invoked; configuring applyTo patterns; defining tool restrictions; creating custom agent modes or specialized workflows; packaging domain knowledge; fixing YAML frontmatter syntax. DO NOT USE FOR: general coding questions (use default agent); runtime debugging or error diagnosis; MCP server configuration (use MCP docs directly); VS Code extension development. INVOKES: file system tools (read/write customization files), ask-questions tool (interview user for requirements), subagents for codebase exploration. FOR SINGLE OPERATIONS: For quick YAML frontmatter fixes or creating a single file from a known pattern, edit the file directly — no skill needed.</description>
+    <file>c:\Users\rober\AppData\Local\Programs\Microsoft VS Code\04c0d99f4f\resources\app\extensions\copilot\assets\prompts\skills\agent-customization\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>chronicle</name>
+    <description>Analyze Copilot session history for standup reports, usage tips, session search, and session reindexing. Use when the user asks for a standup, daily summary, usage tips, workflow recommendations, wants to search or find past sessions by keyword/file/PR, wants to reindex their session store, or asks about deleting session data.</description>
+    <file>c:\Users\rober\AppData\Local\Programs\Microsoft VS Code\04c0d99f4f\resources\app\extensions\copilot\assets\prompts\skills\chronicle\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>atlas-stream-processing</name>
+    <description>Manages MongoDB Atlas Stream Processing (ASP) workflows. Handles workspace provisioning, data source/sink connections, processor lifecycle operations, debugging diagnostics, and tier sizing. Supports Kafka, Atlas clusters, S3, HTTPS, and Lambda integrations for streaming data workloads and event processing. NOT for general MongoDB queries or Atlas cluster management. Requires MongoDB MCP Server with Atlas API credentials.</description>
+    <file>c:\Users\rober\.vscode\extensions\mongodb.mongodb-vscode-1.18.0\ext\agent-skills\skills\atlas-stream-processing\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>mongodb-connection</name>
+    <description>Optimize MongoDB client connection configuration (pools, timeouts, patterns) for any supported driver language. Use this skill when working/updating/reviewing on functions that instantiate or configure a MongoDB client (eg, when calling `connect()`), configuring connection pools, troubleshooting connection errors (ECONNREFUSED, timeouts, pool exhaustion), optimizing performance issues related to connections. This includes scenarios like building serverless functions with MongoDB, creating API endpoints that use MongoDB, optimizing high-traffic MongoDB applications, creating long-running tasks and concurrency, or debugging connection-related failures.</description>
+    <file>c:\Users\rober\.vscode\extensions\mongodb.mongodb-vscode-1.18.0\ext\agent-skills\skills\mongodb-connection\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>mongodb-natural-language-querying</name>
+    <description>Generate read-only MongoDB queries (find) or aggregation pipelines using natural language, with collection schema context and sample documents. Use this skill whenever the user asks to write, create, or generate MongoDB queries, wants to filter/query/aggregate data in MongoDB, asks "how do I query...", needs help with query syntax, or discusses finding/filtering/grouping MongoDB documents. Also use for translating SQL-like requests to MongoDB syntax. Does NOT handle Atlas Search ($search operator), vector/semantic search ($vectorSearch operator), fuzzy matching, autocomplete indexes, or relevance scoring - use search-and-ai for those. Does NOT analyze or optimize existing queries - use mongodb-query-optimizer for that. Does NOT handle aggregation pipelines that involve write operations. Requires MongoDB MCP server.</description>
+    <file>c:\Users\rober\.vscode\extensions\mongodb.mongodb-vscode-1.18.0\ext\agent-skills\skills\mongodb-natural-language-querying\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>mongodb-query-optimizer</name>
+    <description>Help with MongoDB query optimization and indexing. Use only when the user asks for optimization or performance: "How do I optimize this query?", "How do I index this?", "Why is this query slow?", "Can you fix my slow queries?", "What are the slow queries on my cluster?", etc. Do not invoke for general MongoDB query writing unless user asks for performance or index help. Prefer indexing as optimization strategy. Use MongoDB MCP when available.</description>
+    <file>c:\Users\rober\.vscode\extensions\mongodb.mongodb-vscode-1.18.0\ext\agent-skills\skills\mongodb-query-optimizer\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>mongodb-schema-design</name>
+    <description>MongoDB schema design patterns and anti-patterns. Use when designing data models, reviewing schemas, migrating from SQL, or troubleshooting performance issues caused by schema problems. Triggers on "design schema", "embed vs reference", "MongoDB data model", "schema review", "unbounded arrays", "one-to-many", "tree structure", "16MB limit", "schema validation", "JSON Schema", "time series", "schema migration", "polymorphic", "TTL", "data lifecycle", "archive", "index explosion", "unnecessary indexes", "approximation pattern", "document versioning".</description>
+    <file>c:\Users\rober\.vscode\extensions\mongodb.mongodb-vscode-1.18.0\ext\agent-skills\skills\mongodb-schema-design\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>mongodb-search-and-ai</name>
+    <description>Guides MongoDB users through implementing and optimizing Atlas Search (full-text), Vector Search (semantic), and Hybrid Search solutions. Use this skill when users need to build search functionality for text-based queries (autocomplete, fuzzy matching, faceted search), semantic similarity (embeddings, RAG applications), or combined approaches. Also use when users need text containment, substring matching ('contains', 'includes', 'appears in'), case-insensitive or multi-field text search, or filtering across many fields with variable combinations. Provides workflows for selecting the right search type, creating indexes, constructing queries, and optimizing performance using the MongoDB MCP server.
+    </description>
+    <file>c:\Users\rober\.vscode\extensions\mongodb.mongodb-vscode-1.18.0\ext\agent-skills\skills\mongodb-search-and-ai\SKILL.md</file>
+    </skill>
+    <skill>
+    <name>configure-mongodb-mcp</name>
+    <description>Guide users through configuring key MongoDB MCP server options. Use this skill when a user wants to set up or modify their MongoDB MCP server configuration.</description>
+    <file>c:\Users\rober\.vscode\extensions\mongodb.mongodb-vscode-1.18.0\skills\configure-mongodb-mcp\SKILL.md</file>
+    </skill>
+    </skills>
+
+
+    <agents>
+    Here is a list of agents that can be used when running a subagent.
+    Each agent has optionally a description with the agent's purpose and expertise. When asked to run a subagent, choose the most appropriate agent from this list.
+    Use the #tool:agent/runSubagent tool with the agent name to run the subagent.
+    <agent>
+    <name>Fabric</name>
+    <description>This agent helps Microsoft Fabric users interact with the Fabric platform through VS Code and MCP tools to manage workspaces, items, OneLake storage, and real-time analytics.</description>
+    </agent>
+    <agent>
+    <name>Explore</name>
+    <description>Fast read-only codebase exploration and Q&amp;A subagent. Prefer over manually chaining multiple search and file-reading operations to avoid cluttering the main conversation. Safe to call in parallel. Specify thoroughness: quick, medium, or thorough.</description>
+    <argumentHint>Describe WHAT you're looking for and desired thoroughness (quick/medium/thorough)</argumentHint>
+    </agent>
+    </agents>
+
+generationTime: 2026-09-29T00:08:44.061Z
+---
+flowchart TD
+    Inicio(["Inicio"])
+
+    subgraph Entrenamiento["Flujo de entrenamiento"]
+        T1["train.py: iniciar entrenamiento"]
+        T2["Seleccionar dispositivo: CUDA o CPU"]
+        T3["dataset.py: cargar imágenes con ImageFolder"]
+        T4["Dividir datos: 70% entrenamiento, 15% validación y 15% prueba"]
+        T5["Aplicar transformaciones y crear DataLoaders"]
+        T6["Crear EfficientNet-B0 con pesos preentrenados"]
+        T7["Congelar extractor de características"]
+        T8["Configurar capa final para 10 clases"]
+        T9["Entrenar durante 5 épocas"]
+        T10["Validar el modelo"]
+        T11["Evaluar con conjunto de prueba"]
+        T12["Guardar pesos en model.pth"]
+
+        T1 --> T2 --> T3 --> T4 --> T5 --> T6 --> T7 --> T8 --> T9 --> T10 --> T11 --> T12
+    end
+
+    subgraph Inferencia["Flujo de predicción con Streamlit"]
+        I1["app.py: iniciar aplicación"]
+        I2{"¿Existe model.pth?"}
+        I3["Mostrar advertencia"]
+        I4["Cargar EfficientNet-B0 y pesos"]
+        I5["Esperar imagen JPG, JPEG o PNG"]
+        I6{"¿Se cargó una imagen?"}
+        I7["Mostrar imagen"]
+        I8["Redimensionar a 224x224"]
+        I9["Convertir a tensor y normalizar"]
+        I10["Ejecutar inferencia"]
+        I11["Calcular probabilidades con Softmax"]
+        I12["Seleccionar clase con mayor probabilidad"]
+        I13["Traducir clase al español"]
+        I14["Mostrar predicción y confianza"]
+        I15["Mostrar gráfico de probabilidades"]
+
+        I1 --> I2
+        I2 -->|No| I3
+        I2 -->|Sí| I4 --> I5 --> I6
+        I6 -->|No| I5
+        I6 -->|Sí| I7 --> I8 --> I9 --> I10 --> I11 --> I12 --> I13 --> I14 --> I15
+    end
+
+    subgraph Configuracion["Configuración y componentes"]
+        C1["config.py: rutas, semilla y parámetros"]
+        C2["EfficientNet-B0"]
+        C3["10 clases de animales"]
+        C4["translate.py: traducción de etiquetas"]
+    end
+
+    subgraph Legacy["Módulos alternativos o no conectados al flujo principal"]
+        L1["model_builder.py: modelo lineal para clasificación"]
+        L2["engine.py: train_step y test_step"]
+        L3["get_data.py: carga CSV con pandas"]
+        L4["predict_image.py: predicción de imágenes 8x8 en escala de grises"]
+    end
+
+    T12 --> I4
+    C1 --> T1
+    C2 --> T6
+    C3 --> T8
+    C4 --> I13
+    L1 -.-> L4
+    L2 -.-> T9
+    L3 -.-> L1
