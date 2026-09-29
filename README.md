@@ -140,15 +140,10 @@ python src/train.py --epochs 25 --batch_size 32
 
 ## 🤝 Contribución
 ¡Las contribuciones son bienvenidas! Si deseas mejorar el modelo, agregar nuevas especies o corregir errores:
-
 * Haz un Fork del proyecto.
-
 * Crea una nueva rama (git checkout -b feature/NuevaCaracteristica).
-
 * Haz un Commit de tus cambios (git commit -m 'Añadir nueva característica').
-
 * Haz Push a la rama (git push origin feature/NuevaCaracteristica).
-
 * Abre un Pull Request.
 
 ## 📄 Licencia
