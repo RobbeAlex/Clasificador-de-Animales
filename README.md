@@ -105,7 +105,7 @@ Esto abrirá automáticamente una pestaña en tu navegador web (por defecto en h
 ```bash
 Clasificador-de-Animales/
 │
-├── data/                   # Datasets de entrenamiento y prueba (no incluido en git)
+├── data/                   # Datasets de entrenamiento y prueba
 ├── models/                 # Modelos entrenados y guardados (.pt, .pth)
 ├── src/                    # Código fuente principal
 │   ├── config.py           # Script para establecer variables de ruta y entorno
@@ -117,6 +117,7 @@ Clasificador-de-Animales/
 │   ├── train.py            # Script principal de entrenamiento
 │   ├── predict_image.py    # Clasificación de imágenes nuevas mediante terminal
 │   └── app.py              # Aplicación principal de Streamlit (Interfaz Web)
+├── .gitignore              # Archivos y Carpetas que se debe ignorar y no rastrear
 ├── requirements.txt        # Dependencias del proyecto
 └── README.md               # Documentación del proyecto
 ```
