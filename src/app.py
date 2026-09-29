@@ -42,7 +42,7 @@ def load_trained_model(filepath):
     model.classifier[1] = nn.Linear(in_features=in_features, out_features=10) 
     
     # 3. Cargar el diccionario de pesos en el modelo
-    state_dict = torch.load(filepath, map_location=device)
+    state_dict = torch.load(filepath, map_location=device, weights_only=False)
     model.load_state_dict(state_dict)
     
     # 4. Mover al dispositivo y poner en modo de evaluación
@@ -57,7 +57,7 @@ st.title("Clasificador de Animales")
 st.write("Sube una imagen para predecir a qué animal corresponde.")
 
 # Selector del archivo de pesos del modelo
-weights_file = Path("model.pth")  # Cambia por la ruta de tu modelo guardado
+weights_file = Path(r"C:\Users\rober\Downloads\Clasificador_de_Animales\models\model.pth")  # Cambia por la ruta de tu modelo guardado
 
 if not weights_file.exists():
     st.warning(f"No se encontró el archivo de modelo `{weights_file}`. Asegúrate de haber ejecutado el entrenamiento y guardado los pesos.")

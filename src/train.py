@@ -11,7 +11,7 @@ def train():
 
     # 1. Cargar DataLoaders inyectando explícitamente el directorio
     print("Cargando datos...")
-    data_directory = r"C:\Users\rober\.gemini\antigravity\scratch\ai-code-auditor\Deep_Learning_CUGDL\07_pytorch_modular_intro\personal\raw-img"
+    data_directory = r"C:\Users\rober\Downloads\Clasificador_de_Animales\data"
 
     train_loader, val_loader, test_loader, class_names = create_dataloaders(
         data_dir=data_directory,
@@ -103,7 +103,7 @@ def train():
     print(f"Resultados de Prueba | Test Loss: {test_loss:.4f} - Test Acc: {test_acc * 100:.2f}%")
 
     # 6. Guardado seguro usando state_dict en lugar del modelo completo
-    output_path = Path("model.pth")
+    output_path = Path(r"C:\Users\rober\Downloads\Clasificador_de_Animales\models\model.pth")
     torch.save(model.state_dict(), output_path)
     print(f"\nEntrenamiento finalizado. Pesos del modelo guardados en: {output_path.resolve()}")
 
