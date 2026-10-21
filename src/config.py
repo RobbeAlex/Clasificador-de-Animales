@@ -1,15 +1,11 @@
-# Variables utilizadas en el flujo de trabajo
+"""Proxy de compatibilidad hacia config/config.py."""
+import sys
+from pathlib import Path
 
-# Data paths
+_project_root = Path(__file__).resolve().parent.parent
+if str(_project_root) not in sys.path:
+    sys.path.insert(0, str(_project_root))
+if str(_project_root / "config") not in sys.path:
+    sys.path.insert(0, str(_project_root / "config"))
 
-TRAIN_PATH = "../Clasificador-de-Animales/data"
-TEST_PATH = "../Clasificador-de-Animales/data"
-
-# Random seed
-SEED = 42
-
-
-# TRAINING
-EPOCHS = 100
-LEARNING_RATE = 0.05
-HIDDEN_UNITS = 20
+from config.config import *

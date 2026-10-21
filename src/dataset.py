@@ -2,6 +2,7 @@ from pathlib import Path
 import torch
 from torch.utils.data import DataLoader, random_split, Dataset
 from torchvision import datasets, transforms
+from config import DATA_PATH
 
 
 class TransformedSubset(Dataset):
@@ -24,7 +25,7 @@ class TransformedSubset(Dataset):
 
 
 def create_dataloaders(
-    data_dir: str = r"C:\Users\rober\Downloads\Clasificador_de_Animales\data",
+    data_dir: str = str(Path(__file__).resolve().parent.parent / "data"),
     train_split_ratio: float = 0.7,
     val_split_ratio: float = 0.15,
     batch_size: int = 32,
@@ -39,8 +40,8 @@ def create_dataloaders(
     """
     data_path = Path(data_dir)
 
-    if not data_path.exists():
-        raise FileNotFoundError(f"No se encontró la carpeta de datos en: {data_path}")
+    if not Path(data_path).exists():
+        raise FileNotFoundError(f"No se encontró la carpeta de datos en: {data_dir}")
 
     # Transformaciones con Data Augmentation para entrenamiento
     train_transform = transforms.Compose([

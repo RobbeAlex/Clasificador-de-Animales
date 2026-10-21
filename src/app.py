@@ -6,6 +6,8 @@ import torch.nn.functional as F
 from torchvision import transforms
 from torchvision.models import efficientnet_b0
 from PIL import Image
+import os
+
 
 # 1. Configuración de página
 st.set_page_config(
@@ -56,11 +58,13 @@ def load_trained_model(filepath):
 st.title("Clasificador de Animales")
 st.write("Sube una imagen para predecir a qué animal corresponde.")
 
-# Selector del archivo de pesos del modelo
-weights_file = Path(r"C:\Users\rober\Downloads\Clasificador_de_Animales\models\model.pth")  # Cambia por la ruta de tu modelo guardado
 
-if not weights_file.exists():
-    st.warning(f"No se encontró el archivo de modelo `{weights_file}`. Asegúrate de haber ejecutado el entrenamiento y guardado los pesos.")
+# Selector del archivo de pesos del modelo
+weights_file = Path(__file__).resolve().parent.parent / "models" / "modelo.pth"
+
+
+if not os.path.exists(weights_file):
+    print("Weights file not found!")
 else:
     model = load_trained_model(str(weights_file))
 

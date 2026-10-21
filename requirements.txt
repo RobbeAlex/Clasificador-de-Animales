@@ -1,6 +1,8 @@
-numpy
-pandas
-Pillow
-streamlit
 torch
 torchvision
+numpy
+Pillow
+matplotlib
+scikit-learn
+tqdm
+streamlit
